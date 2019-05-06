@@ -12,27 +12,56 @@ import java.sql.*;
 
 public class ReizigersDAOimpl extends OraclebaseDAO implements ReizigersDAO {
 	private List<Reiziger> mijnreiziger;
+	OvchipkaartDAOimpl dao = new OvchipkaartDAOimpl();
+
 
 	public List<Reiziger> findAll() {
 		Connection connection = super.getConnection();
 		List<Reiziger> al = new ArrayList<>();
 
+
 		try {
 			Statement stmt = connection.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT * FROM reiziger");
-			if (rs.next()) {
+			while (rs.next()) {
 				Reiziger r = new Reiziger();
 				r.setId(rs.getInt("reizigerid"));
 				r.setNaam(rs.getString("achternaam"));
 				r.setGbdatum(rs.getDate("gebortedatum"));
+				List<Ovchipkaart> a = dao.findByReiziger(r);
+				for (Ovchipkaart ov : a){
+					r.addMijnOvchipkaart(ov);
+				}
 				al.add(r);
-				return al;
+
 			}
+			return al;
 		} catch (SQLException ex) {
 			ex.printStackTrace();
 		}
 		return null;
 	}
+
+	public List<Reiziger> findByReizigerId(int reizigerId){
+		Connection connection = super.getConnection();
+		List<Reiziger> a = new ArrayList<>();
+		try {
+			Statement stmt = connection.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT * FROM reiziger WHERE reizigerId =" +reizigerId);
+			while (rs.next()) {
+				Reiziger r = new Reiziger();
+				r.setId(rs.getInt("reizigerid"));
+				r.setNaam(rs.getString("achternaam"));
+				r.setGbdatum(rs.getDate("gebortedatum"));
+				r.setVoorletter(rs.getString("voorletters"));
+				a.add(r);
+			}
+			return a;
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		}
+		return null;
+	};
 
 	public List<Reiziger> findByGBdatum(String Gbdatum) {
 		Connection connection = super.getConnection();

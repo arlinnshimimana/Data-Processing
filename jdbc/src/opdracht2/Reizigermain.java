@@ -14,21 +14,21 @@ public class Reizigermain {
 		ReizigersDAO DAO = new ReizigersDAOimpl();
 		
 	
-		
-		Reiziger r1 = new Reiziger(1, "Arlin",new SimpleDateFormat("dd-MM-yyyy").parse("13-04-2004"));
-		Reiziger r2 = new Reiziger(2,"Bart",new SimpleDateFormat("dd-MM-yyyy").parse("03-07-2004"));
-		Reiziger r3 = new Reiziger(3,"Armand",new SimpleDateFormat("dd-MM-yyyy").parse("18-09-2014"));
-		
+
+		Reiziger r1 = new Reiziger(1, "Arlin",new SimpleDateFormat("dd-MM-yyyy").parse("13-04-2004"), "");
+		Reiziger r2 = new Reiziger(2,"Bart",new SimpleDateFormat("dd-MM-yyyy").parse("03-07-2004"), "");
+		Reiziger r3 = new Reiziger(3,"Armand",new SimpleDateFormat("dd-MM-yyyy").parse("18-09-2014"), "");
+
 		System.out.println(r1.getNaam());
 		System.out.println(r2.getNaam());
 		System.out.println(r3.getNaam());
 		System.out.println(r2.getGbdatum());
-		
+
 		System.out.println(DAO.save(r1));
 		System.out.println(DAO.save(r2));
 		System.out.println(DAO.save(r3));
 		System.out.println(DAO.delete(r2));
-		System.out.println(DAO.update(new Reiziger(3,"Hans",new SimpleDateFormat("dd-MM-yyyy").parse("18-09-2004"))));
+		System.out.println(DAO.update(new Reiziger(3,"Hans",new SimpleDateFormat("dd-MM-yyyy").parse("18-09-2004"), "")));
 		System.out.println(DAO.findAll());
 		
 		

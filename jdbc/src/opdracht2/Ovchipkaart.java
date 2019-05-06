@@ -7,12 +7,22 @@ public class Ovchipkaart {
 	private Date geldigTot;
 	private int klasse;
 	private Number saldo;
+	private Reiziger reiziger;
 	
 	public Ovchipkaart(int kn, Date gld, int kl, Number sal) {
 		kaartNummer= kn;
 		geldigTot = gld;
 		klasse = kl;
 		saldo = sal;
+	}
+	public Ovchipkaart() {};
+
+	public Reiziger getReiziger() {
+		return reiziger;
+	}
+
+	public void setReiziger(Reiziger reiziger) {
+		this.reiziger = reiziger;
 	}
 
 	public int getKaartNummer() {

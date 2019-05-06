@@ -46,7 +46,8 @@ public class Reiziger {
 	public ArrayList<Ovchipkaart> getMijnOvchipkaart() {
 		return mijnOvchipkaarten;
 	}
-	public Ovchipkaart setMijnOvchipkaart(Ovchipkaart a) {
+
+	public Ovchipkaart addMijnOvchipkaart(Ovchipkaart a) {
 		mijnOvchipkaarten.add(a);
 		return a;
 	}

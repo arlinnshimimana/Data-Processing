@@ -19,7 +19,9 @@ public class OraclebaseDAO {
 	public OraclebaseDAO() {
 		//maak connectie aan
 		try {
+			if(conn ==null){
 			conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
+			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -43,8 +45,5 @@ public class OraclebaseDAO {
 		}
 		
 }
-	 public static void main(String[] args) {
-	        Connection connection = OraclebaseDAO.getConnection();
-	    }
 
 }
