@@ -60,7 +60,7 @@ public class Ovchipkaart {
 	@Override
 	public String toString() {
 		return "Ovchipkaart [kaartNummer=" + kaartNummer + ", geldigTot=" + geldigTot + ", klasse=" + klasse
-				+ ", saldo=" + saldo + "]";
+				+ ", saldo=" + saldo + ", reiziger= "+ reiziger+"]";
 	}
 
 	

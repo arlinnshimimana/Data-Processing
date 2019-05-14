@@ -15,7 +15,7 @@ public class OraclebaseDAO {
 	private static final String DB_PASS = "admin";
 	private static Connection conn;
 	//protected Connection getconnection;
-	
+
 	public OraclebaseDAO() {
 		//maak connectie aan
 		try {
@@ -25,14 +25,16 @@ public class OraclebaseDAO {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public Connection getConnection() {
 		//return de connectyion
-		
-	
-	return conn;	
-		
+
+
+		return conn;
+
 	}
+
 	public void CloseConnection() {
-		
+
+	}
 }

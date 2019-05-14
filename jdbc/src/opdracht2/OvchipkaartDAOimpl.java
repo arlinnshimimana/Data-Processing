@@ -18,12 +18,22 @@ public class OvchipkaartDAOimpl extends OraclebaseDAO {
 			Statement stmt = connection.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT * FROM ov_chipkaart ");
 			while (rs.next()) {
-				Ovchipkaart r = new Ovchipkaart();
-				r.setKaartNummer(rs.getInt("kaartnummer"));
-				r.setKlasse(rs.getInt("klasse"));
-				r.setGeldigTot(rs.getDate("geldigtot"));
-				r.setSaldo(rs.getBigDecimal("saldo"));
-				al.add(r);
+				Ovchipkaart o = new Ovchipkaart();
+				o.setKaartNummer(rs.getInt("kaartnummer"));
+				o.setKlasse(rs.getInt("klasse"));
+				o.setGeldigTot(rs.getDate("geldigtot"));
+				o.setSaldo(rs.getBigDecimal("saldo"));
+				Statement st = connection.createStatement();
+				ResultSet as = st.executeQuery("Select * from reiziger where reizigerid ="+rs.getInt("reizigerid"));
+				while (as.next()){
+					Reiziger r = new Reiziger();
+					r.setId(as.getInt("reizigerid"));
+					r.setNaam(as.getString("achternaam"));
+					r.setGbdatum(as.getDate("gebortedatum"));
+					r.setVoorletter(as.getString("voorletters"));
+					o.setReiziger(r);
+				}
+				al.add(o);
 
 			}
 			return al;
