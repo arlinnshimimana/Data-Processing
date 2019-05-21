@@ -11,9 +11,13 @@ public class main {
 
 		
 		System.out.println(DAO.getConnection())	;
+		Reiziger r = new Reiziger();
+		r.setId(321);
+		r.setNaam("arkin");
+		r.setVoorletter("b");
+		r.setGbdatum( java.sql.Date.valueOf("1999-07-23"));
 		
+		System.out.println(DAO.findAll());
 
-
-		System.out.println(dao.findAll());
 }
 }

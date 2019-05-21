@@ -2,6 +2,7 @@ package opdracht2;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class Reiziger {
 	private int reizigerID;
@@ -16,6 +17,20 @@ public class Reiziger {
 		naam = nm;
 		gbdatum = gb;
 	}
+	
+	public Ovchipkaart addKaarten(Ovchipkaart a) {
+		mijnOvchipkaarten.add(a);
+		return a;
+	}
+
+	public ArrayList<Ovchipkaart> getMijnOvchipkaarten() {
+		return mijnOvchipkaarten;
+	}
+
+	public void setMijnOvchipkaarten(ArrayList<Ovchipkaart> mijnOvchipkaarten) {
+		this.mijnOvchipkaarten = mijnOvchipkaarten;
+	}
+
 	public Reiziger() {};
 	public int getId() {
 		return reizigerID;
@@ -41,16 +56,16 @@ public class Reiziger {
 	}
 	
 	public String toString() {
-		return naam+" geboren "+gbdatum;
+		String ovchipkaarten= "";
+		for(int i = 0; i < this.mijnOvchipkaarten.size(); i++) {
+			ovchipkaarten += this.mijnOvchipkaarten.get(i);
+		}
+		return naam+" geboren "+gbdatum+"["+ovchipkaarten+"]";
 	}
 	public ArrayList<Ovchipkaart> getMijnOvchipkaart() {
 		return mijnOvchipkaarten;
 	}
 
-	public Ovchipkaart addMijnOvchipkaart(Ovchipkaart a) {
-		mijnOvchipkaarten.add(a);
-		return a;
-	}
 	public String getVoorletter() {
 		return voorletter;
 	}

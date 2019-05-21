@@ -14,37 +14,36 @@ public class ReizigersDAOimpl extends OraclebaseDAO implements ReizigersDAO {
 	private List<Reiziger> mijnreiziger;
 	OvchipkaartDAOimpl dao = new OvchipkaartDAOimpl();
 
+		public List<Reiziger> findAll() {
+			Connection connection = super.getConnection();
+			List<Reiziger> al = new ArrayList<>();
 
-	public List<Reiziger> findAll() {
-		Connection connection = super.getConnection();
-		List<Reiziger> al = new ArrayList<>();
 
+			try {
+				Statement stmt = connection.createStatement();
+				ResultSet rs = stmt.executeQuery("SELECT * FROM reiziger");
+				while (rs.next()) {
+					Reiziger r = new Reiziger();
+					r.setId(rs.getInt("reizigerid"));
+					r.setNaam(rs.getString("achternaam"));
+					r.setGbdatum(rs.getDate("gebortedatum"));
+					ArrayList<Ovchipkaart> a = dao.findByReiziger(r);
+					//for (Ovchipkaart ov : a){
+						r.setMijnOvchipkaarten(a);
+					//}
+					al.add(r);
 
-		try {
-			Statement stmt = connection.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT * FROM reiziger");
-			while (rs.next()) {
-				Reiziger r = new Reiziger();
-				r.setId(rs.getInt("reizigerid"));
-				r.setNaam(rs.getString("achternaam"));
-				r.setGbdatum(rs.getDate("gebortedatum"));
-				List<Ovchipkaart> a = dao.findByReiziger(r);
-				for (Ovchipkaart ov : a){
-					r.addMijnOvchipkaart(ov);
 				}
-				al.add(r);
-
+				return al;
+			} catch (SQLException ex) {
+				ex.printStackTrace();
 			}
-			return al;
-		} catch (SQLException ex) {
-			ex.printStackTrace();
+			return null;
 		}
-		return null;
-	}
 
-	public List<Reiziger> findByReizigerId(int reizigerId){
+	public Reiziger findByReizigerId(int reizigerId){
 		Connection connection = super.getConnection();
-		List<Reiziger> a = new ArrayList<>();
+		Reiziger re = null;
 		try {
 			Statement stmt = connection.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT * FROM reiziger WHERE reizigerId =" +reizigerId);
@@ -54,9 +53,9 @@ public class ReizigersDAOimpl extends OraclebaseDAO implements ReizigersDAO {
 				r.setNaam(rs.getString("achternaam"));
 				r.setGbdatum(rs.getDate("gebortedatum"));
 				r.setVoorletter(rs.getString("voorletters"));
-				a.add(r);
+				re = r;
 			}
-			return a;
+			return re;
 		} catch (SQLException ex) {
 			ex.printStackTrace();
 		}
