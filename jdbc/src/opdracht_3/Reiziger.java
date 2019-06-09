@@ -1,23 +1,22 @@
-package opdracht2;
+package opdracht_3;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 public class Reiziger {
 	private int reizigerID;
 	private String voorletter;
 	private String naam;
 	private Date gbdatum;
-	private ArrayList<Ovchipkaart> mijnOvchipkaarten= new ArrayList<>();
-	
-	public Reiziger(int id,String nm, Date gb, String vrl) {
+	private ArrayList<Ovchipkaart> mijnOvchipkaarten = new ArrayList<>();
+
+	public Reiziger(int id, String nm, Date gb, String vrl) {
 		reizigerID = id;
 		voorletter = vrl;
 		naam = nm;
 		gbdatum = gb;
 	}
-	
+
 	public Ovchipkaart addKaarten(Ovchipkaart a) {
 		mijnOvchipkaarten.add(a);
 		return a;
@@ -31,10 +30,13 @@ public class Reiziger {
 		this.mijnOvchipkaarten = mijnOvchipkaarten;
 	}
 
-	public Reiziger() {};
+	public Reiziger() {
+	};
+
 	public int getId() {
 		return reizigerID;
 	}
+
 	public void setId(int id) {
 		this.reizigerID = id;
 	}
@@ -54,14 +56,13 @@ public class Reiziger {
 	public void setGbdatum(Date gbdatum) {
 		this.gbdatum = gbdatum;
 	}
-	
+
+	@Override
 	public String toString() {
-		String ovchipkaarten= "";
-		for(int i = 0; i < this.mijnOvchipkaarten.size(); i++) {
-			ovchipkaarten += this.mijnOvchipkaarten.get(i);
-		}
-		return naam+" geboren "+gbdatum+"["+ovchipkaarten+"]";
+		return "reizigerID=" + reizigerID + ", voorletter=" + voorletter + ", naam=" + naam + ", gbdatum=" + gbdatum
+				+ ", mijnOvchipkaarten= \n " + mijnOvchipkaarten + "\n";
 	}
+
 	public ArrayList<Ovchipkaart> getMijnOvchipkaart() {
 		return mijnOvchipkaarten;
 	}
@@ -69,6 +70,7 @@ public class Reiziger {
 	public String getVoorletter() {
 		return voorletter;
 	}
+
 	public void setVoorletter(String voorletters) {
 		this.voorletter = voorletters;
 	}

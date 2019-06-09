@@ -1,4 +1,4 @@
-package Opdracht3;
+package opdracht2.original;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,9 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import opdracht2.Reiziger;
-
-public class OvchipkaartDAOimpl extends OraclebaseDAO implements OvchipkaartDAO {
+public class OvchipkaartDAOimpl extends OraclebaseDAO {
 
 	public List<Ovchipkaart> findAll() {
 		Connection connection = super.getConnection();
@@ -25,16 +23,8 @@ public class OvchipkaartDAOimpl extends OraclebaseDAO implements OvchipkaartDAO 
 				o.setKlasse(rs.getInt("klasse"));
 				o.setGeldigTot(rs.getDate("geldigtot"));
 				o.setSaldo(rs.getBigDecimal("saldo"));
-				Statement st = connection.createStatement();
-				ResultSet as = st.executeQuery("Select * from reiziger where reizigerid ="+rs.getInt("reizigerid"));
-				while (as.next()){
-					Reiziger r = new Reiziger();
-					r.setId(as.getInt("reizigerid"));
-					r.setNaam(as.getString("achternaam"));
-					r.setGbdatum(as.getDate("gebortedatum"));
-					r.setVoorletter(as.getString("voorletters"));
-					o.setReiziger(r);
-				}
+				ReizigersDAOimpl r= new ReizigersDAOimpl();
+				o.setReiziger(r.findByReizigerId(rs.getInt("reizigerid")));
 				al.add(o);
 
 			}
@@ -55,7 +45,7 @@ public class OvchipkaartDAOimpl extends OraclebaseDAO implements OvchipkaartDAO 
 			while (rs.next()) {
 				Ovchipkaart r = new Ovchipkaart();
 				r.setKaartNummer(rs.getInt("kaartnummer"));
-				r.setKlasser(s.getInt("klasse"));
+				r.setKlasse(rs.getInt("klasse"));
 				r.setGeldigTot(rs.getDate("geldigtot"));
 				r.setSaldo(rs.getBigDecimal("saldo"));
 				al.add(r);
@@ -87,11 +77,28 @@ public class OvchipkaartDAOimpl extends OraclebaseDAO implements OvchipkaartDAO 
 	           
 	}
 
-	public List<Ovchipkaart> findByProduct(Product product){
+	public ArrayList<Ovchipkaart> findByReiziger(Reiziger reiziger){
 		Connection connection = super.getConnection();
-		List<Ovchipkaart> al = new ArrayList<>();
+		ArrayList<Ovchipkaart> al = new ArrayList<>();
 
-		
+		try {
+			Statement stmt = connection.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT * FROM ov_chipkaart WHERE reizigerId ='" + reiziger.getId()+ "'");
+			while (rs.next()) {
+				Ovchipkaart o = new Ovchipkaart();
+				o.setKaartNummer(rs.getInt("kaartnummer"));
+				o.setKlasse(rs.getInt("klasse"));
+				o.setGeldigTot(rs.getDate("geldigtot"));
+				o.setSaldo(rs.getBigDecimal("saldo"));
+				o.setReiziger(reiziger);
+				al.add(o);
+
+			}
+			return al;
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		}
+		return null;
 	};
 
 	public Ovchipkaart update(Ovchipkaart ovchipkaart) {
@@ -128,28 +135,4 @@ public class OvchipkaartDAOimpl extends OraclebaseDAO implements OvchipkaartDAO 
 	           
 
 }
-
-	@Override
-	public List<Reiziger> findByGBdatum(String Gbdatum) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Reiziger save(Reiziger reiziger) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Reiziger update(Reiziger reiziger) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Reiziger delete(Reiziger reiziger) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }

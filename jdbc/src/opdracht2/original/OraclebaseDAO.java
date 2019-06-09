@@ -1,4 +1,4 @@
-package opdracht2;
+package opdracht2.original;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

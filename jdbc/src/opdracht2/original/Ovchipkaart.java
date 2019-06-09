@@ -1,6 +1,5 @@
-package Opdracht3;
+package opdracht2.original;
 
-import java.util.ArrayList;
 import java.util.Date;
 
 public class Ovchipkaart {
@@ -8,7 +7,7 @@ public class Ovchipkaart {
 	private Date geldigTot;
 	private int klasse;
 	private Number saldo;
-	private ArrayList<Product> mijnProducten = new ArrayList<>();
+	private Reiziger reiziger;
 	
 	public Ovchipkaart(int kn, Date gld, int kl, Number sal) {
 		kaartNummer= kn;
@@ -17,6 +16,14 @@ public class Ovchipkaart {
 		saldo = sal;
 	}
 	public Ovchipkaart() {};
+
+	public Reiziger getReiziger() {
+		return reiziger;
+	}
+
+	public void setReiziger(Reiziger reiziger) {
+		this.reiziger = reiziger;
+	}
 
 	public int getKaartNummer() {
 		return kaartNummer;
@@ -53,7 +60,7 @@ public class Ovchipkaart {
 	@Override
 	public String toString() {
 		return "Ovchipkaart [kaartNummer=" + kaartNummer + ", geldigTot=" + geldigTot + ", klasse=" + klasse
-				+ ", saldo=" + saldo +"]";
+				+ ", saldo=" + saldo + ", reiziger= "+ reiziger.getId()+"]";
 	}
 
 	

@@ -1,4 +1,4 @@
-package Opdracht3;
+package opdracht_3;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

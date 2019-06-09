@@ -3,7 +3,7 @@
 //Achternaam: NShimimana
 //Opdracht nummer: p1
 
-package opdracht2;
+package opdracht_3;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 

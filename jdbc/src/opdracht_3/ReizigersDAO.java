@@ -1,4 +1,4 @@
-package opdracht2;
+package opdracht_3;
 
 import java.util.List;
 

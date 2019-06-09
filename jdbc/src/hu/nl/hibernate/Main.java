@@ -28,12 +28,13 @@ public class Main {
       Transaction t = session.beginTransaction();
 
       Log log = new Log(1,"Hibernate works!");
-      Klasgenoot k = new Klasgenoot(4,"Kristiaan","unknown","zoon van god",20);
+      Klasgenoot k = new Klasgenoot(4,"Kristiaan","unknown","opa",20);
       Klasgenoot l = (Klasgenoot) session.get(Klasgenoot.class, 1);
       l.setLeeftijd(20);
       
     
-//create   //session.save(k);
+
+session.save(k);
 //read     //System.out.println(session.get(Klasgenoot.class,1));
 //update   //session.update(l);   
 //delete   //session.delete(k);
